@@ -78,7 +78,7 @@ img: "https://images.pexels.com/photos/2104252/pexels-photo-2104252.jpeg"
   //Can put statements before the return - variables, printing 
   const showEmployees = true; 
   return (
-    <div className="App bg-gray-300 min-h-screen">
+    <div className="App">
       
       {/* to show js code must use curly brackets before code */}
       {/* Is blank true use question mark */}
