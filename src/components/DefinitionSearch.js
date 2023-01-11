@@ -1,18 +1,12 @@
 import {useState, useEffect} from 'react'; 
+import { useNavigate } from 'react-router-dom';
 
-export default function Dictionary(){
+export default function DefinitionSearch(){
     const [word, setWord] = useState('');
-    const [word2, setWord2] = useState(''); 
+    const navigate = useNavigate(); 
     
 
-    useEffect( () => {
-        console.log("state updated", word); 
-    }, [word]
-    ); //Executes after the state is instantiated allows for it to always check for changes on page load
-    useEffect( () => {
-        console.log("state updated 2", word2); 
-    }, [word2]
-    );
+
 
 
     /**
@@ -28,32 +22,28 @@ export default function Dictionary(){
 
 
     return (
-        <>
+        <form 
+        className='flex space-between space-x-2 max-w-[300px]'
+        onSubmit={() => {
+            
+            navigate('/dictionary/' + word); 
 
-        <input type = 'text' onChange={(e) => {
+        }}>
+
+        <input 
+        className='shrink  min-w-0 px-2 py-1 rounded'
+        placeholder='Enter Word'
+        type = 'text' onChange={(e) => {
             setWord(e.target.value); 
         
         
         }}
         
         />
-
-        <h2> Let's get the definition for {word} </h2> 
-
-
-        <input type = 'text' onChange={(e) => {
-            setWord2(e.target.value); 
+        <button className='bg-purple-600 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded'>Search</button>
         
-        
-        }}
-        
-        />
-
-        <h2> Let's get the definition for {word2} </h2> 
-        
-        
-        
-        </>
+        </form>
     )
+
 
 }
