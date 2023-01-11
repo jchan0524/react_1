@@ -5,6 +5,7 @@ import NotFound from '../components/NotFound';
 import DefinitionSearch from '../components/DefinitionSearch';
 
 
+
 export default function Definition(){
 
     const [word, setWord] = useState();
