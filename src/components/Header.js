@@ -1,8 +1,9 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { propTypes } from "react-bootstrap/esm/Image";
+import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { LoginContext } from "../App";
 
 const navigation = [
   { name: "Employees", href: "/employee" },
@@ -15,6 +16,11 @@ function classNames(...classes) {
 }
 
 export default function Header(props) {
+  const [loggedIn, setLoggedIn] = useContext(LoginContext);
+
+  useEffect(() => {
+    console.log(loggedIn);
+  });
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -71,6 +77,29 @@ export default function Header(props) {
                           {item.name}
                         </NavLink>
                       ))}
+                      {loggedIn ? (
+                        <NavLink
+                          to={"/login"}
+                          onClick={() => {
+                            setLoggedIn(false);
+                            localStorage.clear();
+                          }}
+                          className="px-3 py-2 rounded-md text-sm font-medium no-underline no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+
+                          // aria-current={item.current ? 'page' : undefined}
+                        >
+                          Logout
+                        </NavLink>
+                      ) : (
+                        <NavLink
+                          to={"/login"}
+                          className="px-3 py-2 rounded-md text-sm font-medium no-underline no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+
+                          // aria-current={item.current ? 'page' : undefined}
+                        >
+                          Login
+                        </NavLink>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -174,6 +203,30 @@ export default function Header(props) {
                     {item.name}
                   </NavLink>
                 ))}
+                {loggedIn ? (
+                        <NavLink
+                          to={"/login"}
+                          onClick={() => {
+                            setLoggedIn(false);
+                            localStorage.clear();
+                          }}
+                          className="px-3 py-2 rounded-md text-sm font-medium no-underline no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+
+                          // aria-current={item.current ? 'page' : undefined}
+                        >
+                          Logout
+                        </NavLink>
+                      ) : (
+                        <NavLink
+                          to={"/login"}
+                          className="px-3 py-2 rounded-md text-base font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+
+                          // aria-current={item.current ? 'page' : undefined}
+                        >
+                          Login
+                        </NavLink>
+                      )}
+                
               </div>
             </Disclosure.Panel>
           </>
