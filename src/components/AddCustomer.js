@@ -6,11 +6,11 @@ import Modal from "react-bootstrap/Modal";
 export default function AddCustomer(props) {
   const [name, setName] = useState("");
   const [industry, setIndustry] = useState("");
-  const [img, setImg] = useState("");
-  const [show, setShow] = useState(props.show);
+  const [, setImg] = useState("");
+  const [, setShow] = useState(props.show);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function AddCustomer(props) {
               <div className="md:w-1/3">
                 <label
                   className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                  for="name"
+                  htmlFor="name"
                 >
                   Name
                 </label>
@@ -69,7 +69,7 @@ export default function AddCustomer(props) {
               <div className="md:w-1/3">
                 <label
                   className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                  for="industry"
+                  htmlFor="industry"
                 >
                   Industry
                 </label>

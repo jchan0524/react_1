@@ -53,9 +53,9 @@ function App() {
 
   function changeLoggedIn(value) {
     setLoggedIn(value);
-    console.log("jalfjdklafkldaf");
+    
     if (value === false) {
-      console.log("HELLOOOOOOO");
+      
       localStorage.clear();
     }
   }
@@ -72,7 +72,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/customers/:id" element={<Customer />} />
             <Route path="/404" element={<NotFound />} />
-            <Route path = '/register' element={<Register/>} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Header>

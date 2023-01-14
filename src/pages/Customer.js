@@ -3,10 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../App";
 
 import { baseUrl } from "../shared";
-import Login from "./Login";
 
 export default function Customer() {
-  const [loggedIn, setLoggedIn] = useContext(LoginContext); 
+  const [, setLoggedIn] = useContext(LoginContext); 
   const { id } = useParams();
   const [customer, setCustomer] = useState();
   const [notFound, setNotFound] = useState();
@@ -29,7 +28,7 @@ export default function Customer() {
     if (equal) {
       setChanged(false);
     }
-  });
+  },[customer, tempCustomer]);
 
   //Use Effect
   useEffect(() => {
@@ -69,10 +68,8 @@ export default function Customer() {
       .catch((e) => {
         setError(e.message);
       });
-  }, []);
-  function deleteCutomer() {
-    console.log("deleting...");
-  }
+  }, [id, location.pathname, navigate, setLoggedIn]);
+
 
   function updateCustomer(e) {
     e.preventDefault();
@@ -121,7 +118,7 @@ export default function Customer() {
           >
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/4">
-                <label for="name">Name</label>
+                <label htmlFor="name">Name</label>
               </div>
 
               <div className="md:w-3/4">
@@ -140,7 +137,7 @@ export default function Customer() {
 
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/4">
-                <label for="industry">Industry</label>
+                <label htmlFor="industry">Industry</label>
               </div>
               <div className="md:w-3/4">
                 <input

@@ -1,52 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useParams, useNavigate, Link, useLocation} from "react-router-dom";
-
+import { useParams, Link } from "react-router-dom";
+import UseFetch from "../hooks/UseFetch";
+import NotFound from "../components/NotFound";
 import DefinitionSearch from "../components/DefinitionSearch";
 
 export default function Definition() {
-  const [word, setWord] = useState();
-  const [notFound, setNotFound] = useState(false);
-  const [error, setError] = useState(false);
   let { search } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation(); 
 
+  
+
+  const { request, data: [{ meanings: word }] = [{}], errorStatus } = UseFetch(
+    "https://api.dictionaryapi.dev/api/v2/entries/en/" + search
+  );
   useEffect(() => {
-    fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + search)
-      .then((response) => {
-        if (response.status === 404) {
-          console.log(response.status);
-          setNotFound(true);
-        } else if (response.status === 401) {
-          navigate("/login", {
-            state : {
-              previousUrl : location.pathname, 
-            }
-          });
-        } else if (response.status === 500) {
-          // setServerError(true);
-        }
-        if (!response.ok) {
-          setError(true);
-          throw new Error("Something went wrong!");
-        }
+    request(); 
+  })
 
-        return response.json();
-      })
-      .then((data) => {
-        setWord(data[0].meanings);
-        console.log(data);
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
-  }, []);
 
-  if (error === true) {
+
+  if (errorStatus === 404) {
     return (
       <>
-        <p>Something went wrong, Try Again?</p>
+        <NotFound />
+        <Link to="/dictionary">Search Another?</Link>
+      </>
+    );
+  }
+  if (errorStatus === true) {
+    return (
+      <>
+        <p>Something went wrong, Try Again later?</p>
         <Link to="/dictionary">Search another</Link>
       </>
     );
