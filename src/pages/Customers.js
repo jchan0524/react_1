@@ -45,7 +45,7 @@ export default function Customers() {
             return (
               <div className="m-2" key={customer.id}>
                 <Link to={"/customers/" + customer.id}>
-                  <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded no-underline">
+                  <button className="bg-slate-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded no-underline">
                     {customer.name}
                   </button>
                 </Link>
